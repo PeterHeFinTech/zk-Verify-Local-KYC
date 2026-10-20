@@ -7,7 +7,7 @@ A local, executable KYC credential workflow with authenticated source records, p
 ## Start with the already prepared project
 
 ```bash
-cd /Users/hetianqu/Documents/zk-Verify-Local-KYC
+cd zk-Verify-Local-KYC
 npm run demo
 ```
 
@@ -43,7 +43,7 @@ npm run demo
 
 ## Source data and simulation
 
-Input directory: `/Users/hetianqu/Downloads/archive`.
+Default input directory: `~/Downloads/archive`. You can pass another directory to the import command.
 
 * `clients_with_fatf_ofac.csv`: 2,000 original client rows.
 * `transactions_with_fatf_ofac.csv`: 50,000 original transaction rows, joined by `client_id`.
@@ -65,7 +65,7 @@ The original client table includes 55 `sanctions_flag=1` rows; the original tran
 To run an independent import with another policy, use a **new** directory:
 
 ```bash
-ZK_STATE_DIR=/absolute/path/to/new-experiment node scripts/cli.mjs import /Users/hetianqu/Downloads/archive source-flags
+ZK_STATE_DIR=/absolute/path/to/new-experiment node scripts/cli.mjs import "$HOME/Downloads/archive" source-flags
 ```
 
 Use the same `ZK_STATE_DIR` for all subsequent commands for that experiment. Existing state is never overwritten by import.

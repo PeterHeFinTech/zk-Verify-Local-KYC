@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { homedir } from 'node:os';
 import {spawn,spawnSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {PROJECT,readJSON,writeJSON} from '../lib/files.mjs';
@@ -13,7 +14,7 @@ function cli(args,expected=true){
 }
 function pass(name){results.push({name,passed:true});console.log('PASS:',name);}
 async function main(){
-  cli(['import','/Users/hetianqu/Downloads/archive','source-flags']);
+  cli(['import',process.env.ZK_ARCHIVE_DIR||path.join(homedir(),'Downloads','archive'),'source-flags']);
   const m=readJSON(path.join(dir,'data/manifest.json'));
   assert.equal(m.totalClients,2000);assert.equal(m.sources[1].rows,50000);assert(m.denied>0);assert(m.expired>0);pass('Both actual CSVs imported with flag-derived simulation; flagged records not issued');
   cli(['import'],false);pass('Reimport cannot overwrite state');

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { homedir } from 'node:os';
 import { loadArchive } from '../lib/data.mjs';
 import { keypair, holderCommitment, randomField, sha } from '../lib/crypto.mjs';
 import { attest, checkLocal, privateInput } from '../lib/protocol.mjs';
@@ -24,7 +25,7 @@ Source approval and signing commands are authority-only SIMULATIONS, not a real 
 
 async function main() {
   if(command==='import') {
-    const archive=path.resolve(args[0]||'/Users/hetianqu/Downloads/archive');
+    const archive=path.resolve(args[0]||path.join(homedir(),'Downloads','archive'));
     const policy=args[1]||'simulate-clear';if(!['simulate-clear','source-flags'].includes(policy))throw new Error('Unknown simulation policy');
     if(fs.existsSync(p('state')))throw new Error('State already exists. Use ZK_STATE_DIR pointing to a NEW directory; import never overwrites existing state.');
     const {users,manifest}=loadArchive(archive);
