@@ -1,0 +1,21 @@
+{
+  "name": "zk-verify-local-kyc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "import": "node scripts/cli.mjs import",
+    "setup": "node scripts/setup.mjs",
+    "demo": "node scripts/cli.mjs demo",
+    "test": "node --test tests/core.test.mjs",
+    "test:e2e": "node scripts/e2e.mjs",
+    "test:integration": "node scripts/integration.mjs",
+    "start": "node server/main.mjs"
+  },
+  "dependencies": {
+    "circomlib": "2.0.5",
+    "circomlibjs": "0.1.7",
+    "snarkjs": "0.7.6"
+  }
+}
